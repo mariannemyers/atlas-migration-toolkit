@@ -39,27 +39,12 @@ if (db.hostInfo().ok == 0) {
       totalDataSize += dataSize;
     });
 
-  var totalStorageSizeGB = (
-    db.getSiblingDB("admin").runCommand({ listDatabases: 1 }).totalSize /
-    1024 /
-    1024 /
-    1024
-  ).toFixed(3);
+  var totalStorageSizeGB = (db.getSiblingDB("admin").runCommand({ listDatabases: 1 }).totalSize / 1024 / 1024 / 1024).toFixed(3);
   var totalCompression = ((1 - totalStorageSize / totalDataSize) * 100).toFixed(
     2
   );
-  var fsUsedSizeGB = (
-    db.getSiblingDB("admin").runCommand({ dbStats: 1 }).fsUsedSize /
-    1024 /
-    1024 /
-    1024
-  ).toFixed(1);
-  var fsTotalSizeGB = (
-    db.getSiblingDB("admin").runCommand({ dbStats: 1 }).fsTotalSize /
-    1024 /
-    1024 /
-    1024
-  ).toFixed(3);
+  var fsUsedSizeGB = (db.getSiblingDB("admin").runCommand({ dbStats: 1 }).fsUsedSize / 1024 / 1024 / 1024).toFixed(1);
+  var fsTotalSizeGB = (db.getSiblingDB("admin").runCommand({ dbStats: 1 }).fsTotalSize / 1024 / 1024 / 1024).toFixed(3);
   var percentFsUsed = ((fsUsedSizeGB / fsTotalSizeGB) * 100).toFixed(2);
 
   print("\n=== Cluster Totals ===");
